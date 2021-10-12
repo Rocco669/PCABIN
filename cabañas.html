@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="cabañas">
-  <!-- estilos-->
+<!-- estilos-->
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
@@ -19,14 +19,23 @@
   <!-- Librerias -->
   <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="lib/animate-css/animate.min.css" rel="stylesheet">
+  <!--  fin Librerias -->
+  <link href="css/style.css" rel="stylesheet">
+  <!-- fin estilos-->
+
   <!-- script-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!--<script src="js/jquery-3.6.0.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/listar.js"></script>
+    <script src="js/registrar.js"></script>
+    <script src="js/editar.js"></script>
+    <script src="js/borrar.js"></script>
+    <script src="js/funciones.js"></script>
   <!-- fin script-->
   
 <!-- fin Librerias -->
-  <link href="css/style.css" rel="stylesheet">
-  <!-- fin estilos-->
-  
+
    <!--favicon-->
    <link rel="apple-touch-icon" sizes="57x57" href="img/fav/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="img/fav/apple-icon-60x60.png">
@@ -46,27 +55,8 @@
 <meta name="msapplication-TileImage" content="img/fav/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
          <!--fin favicon-->
-</head>
 
-<body>
-  <!--precargado-->
-  <div id="preloader"></div>
-
-  <!--bienvenida--
-  <section id="welco">
-    <div class="welco-container">
-      <div class="wow fadeIn">
-        <div class="welco-logo">
-          <img class="" src="img/logo.png" alt="reto2">
-        </div>
-        <div class="actions">
-          <a href="#portfolio" class="btn-get-started">Bienvenido</a>
-        </div>
-      </div>
-    </div>
-  </section>-->
- <!--fin bienvenida-->
-  <!--==Sección de encabezado===-->
+          <!--==Sección de encabezado===-->
   <header id="header">
     <div class="container">
       <div id="logo" class="pull-left">
@@ -83,54 +73,95 @@
         </ul>
       </nav>
     </div>
-    <!-- fin contenedor navbar -->
-  </header>
-  <!-- #header -->
+    <!-- fin contenedor navbar -->    
+    
+</head>
 
-  
+<body>
   <!--=Seccion Porfolio =====-->
   <section id="portfolio">
     <div class="container wow fadeInUp">
       <div class="row">
         <div class="col-md-12">
-          <h3 class="section-title">Cabañas</h3>
+          <h3 class="section-title">Cabañas disponibles</h3>
           <div class="section-title-divider"></div>
           <p class="section-description">realiza tus Consultas aqui</p>
         </div>
       </div>
+      <!--=consulta cabañas =====-->
+    <div>
 
-      <div class="row">
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/cabplaya.jpg);" href="cabañas.html">
-            <div class="details">
-              <h4>Cabañas</h4>
-              <span>Consulta disponibilidad</span>
-            </div>
-          </a>
-        </div>
+      <!-- en el elemento identificado con el id 'mensajes' se mostraran los mensajes
+           o resultado de ejecutar la peticion
+      -->
+      <div id="mensajes"></div>
+      <br>
+      
+      
+      <!--aqui se actualizara el listado -->
+      <center><div id="listado"></div></center>
+      <br>
+      <!--boton  -->
+    <div class="galleryCategoryMenu">
+      <ul>
+        <li class="portraits" id="nuevoRegistro" onclick="activaNuevo();" style="
+    left: 380px;
+"><a href="#">Registrar<span></span></a></li>
+  </ul>
+</div>
 
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/client.jpg);" href="clientes.html">
-            <div class="details">
-              <h4>Clientes</h4>
-              <span>Consulta Clientes</span>
-            </div>
-          </a>
-        </div>
+<!--fin boton  -->
 
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/mensaje.jpg);" href="mensajes.html">
-            <div class="details">
-              <h4>Mensajes</h4>
-              <span>Consultar Mensajes</span>
+      <!-- Seccion para nuevos registros-->
+      <center> <div id="nuevo">
+          <h3>Registrar Cabaña</h3>
+          <input type="number" id="id" placeholder="id">
+          <input type="text" id="name" placeholder="name">
+          <input type="text" id="email" placeholder="email">
+          <input type="number" id="age" placeholder="age">
+          <input type="number" id="id" placeholder="id">
+          <button onclick="registrar();" >Guardar</button>
+          <button onclick="estadoInicial();">Cancelar</button>
+      </div></center>
+      <!-- fin Seccion para nuevos registros-->
+
+      <!-- Seccion para editar registros-->
+      <center><div id="editar">
+          <h3>Editar cabaña</h3>
+          <input type="number" id="idEdit" placeholder="id">
+          <input type="text" id="nameEdit" placeholder="name">
+          <input type="text" id="emailEdit" placeholder="email">
+          <input type="number" id="ageEdit" placeholder="age">
+          <input type="number" id="idEdit" placeholder="id">
+          <br><br><br><br>
+          <!-- boton guardar  -->
+          <div class="container"> 
+            <div  class="btn one" onclick="estadoInicial();">
+              <span>Cancelar</span>
+              <div class="dot"></div>
+            </div>&nbsp;&nbsp;&nbsp;&nbsp;
+            <div  class="btn three" onclick="actualizar();">
+              <span>Guardar</span>
+              <div class="dot"></div>
             </div>
-          </a>
-        </div>
-      </div>
+          </div> 
+  
+  
+</div>
+
+<!--fin boton guardar -->
+</center>
+      
+  </div>
+  
+<!--=fin consulta cabañas =====-->
+<a href="index.html"><img src="img/back.png" alt="Regresar"></a>
     </div>
+    
   </section>
 <!--=fin Seccion Porfolio =====-->
 
+<br>
 
   <!--==Footer=========-->
   <footer id="footer">
@@ -154,7 +185,8 @@
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 <!-- fin ascensor-->
 
-  <!-- librerias JavaScript requerdas -->
+
+    <!-- librerias JavaScript requeridas -->
   <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
   <script src="lib/superfish/hoverIntent.js"></script>
@@ -165,10 +197,9 @@
   <script src="lib/easing/easing.js"></script>
 <!-- fin librerias JavaScript requerdas -->
 
-  <!-- css Javascript -->
+  <!-- css Javascript --
   <script src="js/custom.js"></script>
-<!-- fin  css Javascript -->
-
+-- fin  css Javascript -->
 </body>
 
 </html>
